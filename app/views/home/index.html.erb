@@ -1,0 +1,86 @@
+<h1><%= @welcome_message %></h1>
+<p>The current time is: <%= @current_time %></p>
+
+<% if flash[:success] %>
+  <div class="flash flash-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="flash flash-error">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<h1>Subscribe to Our Newsletter</h1>
+
+<%= form_with(url: subscribe_to_mailchimp_path, method: :post) do |form| %>
+  <%# Display any flash messages if present %>
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <%# Display form errors if present %>
+  <% if @errors && @errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :email, 'Email Address' %>
+    <%= form.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'Subscribe', class: 'btn btn-primary' %>
+  </div>
+  
+  <h2>Subscribed Emails:</h2>
+  <ul>
+    <% @subscribed_emails.each do |email| %>
+      <li><%= email %></li>
+    <% end %>
+  </ul>  
+<% end %>
+
+<%= form_with(url: subscribe_to_klaviyo_sms_path, method: :post) do |form| %>
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  <% elsif flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :phone, 'Phone Number' %>
+    <%= form.text_field :phone, class: 'form-control', required: true, pattern: '\d{11}', title: 'Please enter a valid 11-digit phone number' %>
+    <!-- pattern attribute enforces 10-digit phone number format -->
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'Subscribe', class: 'btn btn-primary' %>
+  </div>
+
+  <h2>Subscribed Phone Numbers:</h2>
+  <ul>
+  <% @phone_numbers.each do |phone_number| %>
+    <li><%= phone_number %></li>
+  <% end %>
+</ul>
+
+<% end %>

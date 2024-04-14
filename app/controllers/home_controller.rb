@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     @current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
 
      @subscribed_emails = MailchimpService.subscribed_emails
-     @phone_numbers = KlaviyoService.subscribed_phone_numbers(api_key, list_id)
+     @phone_numbers = KlaviyoService.subscribed_phone_numbers
 
   end
 

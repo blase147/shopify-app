@@ -13,8 +13,6 @@ class KlaviyoService
   def self.subscribed_phone_numbers(api_key, list_id)
     api_key = 'pk_34cec0528c92d55f4a9862d50f292e36a6'
     list_id = 'S9HTBg'
-
-
     url = "#{BASE_URL}#{list_id}/members?status=subscribed"
     headers = {
       'Authorization': "Klaviyo-API-Key #{api_key}",

@@ -73,5 +73,4 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
-  ENV['MAILCHIMP_API_KEY'] = 'dc923e561b24a6520838618510f3de5e-us10'
 end

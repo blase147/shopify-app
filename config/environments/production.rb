@@ -94,5 +94,4 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  ENV['MAILCHIMP_API_KEY'] = 'dc923e561b24a6520838618510f3de5e-us10'
 end

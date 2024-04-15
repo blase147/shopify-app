@@ -55,32 +55,3 @@
   </ul>  
 <% end %>
 
-<%= form_with(url: subscribe_to_klaviyo_sms_path, method: :post) do |form| %>
-  <% if flash[:success] %>
-    <div class="alert alert-success">
-      <%= flash[:success] %>
-    </div>
-  <% elsif flash[:error] %>
-    <div class="alert alert-danger">
-      <%= flash[:error] %>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :phone, 'Phone Number' %>
-    <%= form.text_field :phone, class: 'form-control', required: true, pattern: '\d{11}', title: 'Please enter a valid 11-digit phone number' %>
-    <!-- pattern attribute enforces 10-digit phone number format -->
-  </div>
-
-  <div class="form-group">
-    <%= form.submit 'Subscribe', class: 'btn btn-primary' %>
-  </div>
-
-  <h2>Subscribed Phone Numbers:</h2>
-  <ul>
-  <% @phone_numbers.each do |phone_number| %>
-    <li><%= phone_number %></li>
-  <% end %>
-</ul>
-
-<% end %>

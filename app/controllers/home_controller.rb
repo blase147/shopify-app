@@ -9,8 +9,8 @@ class HomeController < ApplicationController
   end
 
   def subscribe_to_mailchimp
-    email = params[:email] # Ensure that the email parameter is correctly obtained from the form
-    list_id = 'a82be852d0' 
+    email = params[:email]
+    list_id = ENV['MAILCHIMP_LIST_ID']
     MailchimpService.subscribe(email, list_id)  
     redirect_to root_path
   end

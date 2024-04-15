@@ -1,7 +1,7 @@
 Gibbon::Request.api_key = ENV['MAILCHIMP_API_KEY']
 class MailchimpService
   BASE_URL = "https://us10.api.mailchimp.com/3.0/".freeze
-  LIST_ID = "a82be852d0".freeze
+  LIST_ID = ENV['MAILCHIMP_LIST_ID'].freeze
 
   def self.subscribe(email, status)
     url = "#{BASE_URL}lists/#{LIST_ID}/members"
@@ -16,16 +16,14 @@ class MailchimpService
     
     begin
       response = RestClient.post(url, body.to_json, headers)
-      # Handle successful response
     rescue RestClient::ExceptionWithResponse => e
-      # Handle error response
       error_message = JSON.parse(e.response.body)["detail"]
       Rails.logger.error "Mailchimp API Error: #{error_message}"
     end
   end
   
   def self.subscribed_emails
-    list_id = 'a82be852d0' 
+    list_id = ENV['MAILCHIMP_LIST_ID'] 
     begin
       gibbon = Gibbon::Request.new
       response = gibbon.lists(list_id).members.retrieve(params: { status: 'subscribed' })

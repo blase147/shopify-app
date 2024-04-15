@@ -9,9 +9,9 @@ class HomeController < ApplicationController
   end
 
   def subscribe_to_mailchimp
-    email = params[:email]
+    email = params[:email] # Ensure that the email parameter is correctly obtained from the form
     list_id = 'a82be852d0' 
-
+  
     begin
       response = MailchimpService.subscribe(email, list_id)
       flash[:success] = 'Successfully subscribed to Mailchimp list!'
@@ -22,7 +22,8 @@ class HomeController < ApplicationController
         flash[:error] = 'Failed to subscribe to Mailchimp list. Please try again.'
       end
     end
-
+  
     redirect_to root_path
   end
+  
 end

@@ -51,6 +51,8 @@ gem "sendgrid-ruby"
 gem 'klaviyo'
 gem 'rest-client'
 gem 'ffi'
+gem 'dotenv-rails', groups: [:development, :test]
+
 
 
 
